@@ -1,0 +1,40 @@
+package br.com.atos.main.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "skill")
+public class Skill {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id_skill;
+	
+	private String descricao;
+	
+	public Skill(){}
+	
+	public Skill(String descricao){
+		this.descricao = descricao;
+	}
+
+	public Integer getId_skill() {
+		return id_skill;
+	}
+
+	public void setId_skill(Integer id_skill) {
+		this.id_skill = id_skill;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+}

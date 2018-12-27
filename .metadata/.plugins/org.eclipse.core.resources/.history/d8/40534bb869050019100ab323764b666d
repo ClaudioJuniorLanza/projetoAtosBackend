@@ -1,0 +1,31 @@
+package br.com.atos.main.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "employee_skill")
+public class EmployeeSkill implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	@Column(name = "ID_EMPLOYEE")
+	private Integer employee;
+	@Column(name = "ID_SKILL")
+	private Integer skill;
+	
+	public EmployeeSkill(){}
+	
+	public EmployeeSkill(Integer employee, Integer skill){
+		this.employee = employee;
+		this.skill = skill;
+	}
+	
+	
+}

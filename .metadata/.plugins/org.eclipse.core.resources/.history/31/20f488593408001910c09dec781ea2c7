@@ -1,0 +1,68 @@
+package br.com.atos.main.service;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import br.com.atos.main.model.Cliente;
+import br.com.atos.main.model.Employee;
+import br.com.atos.main.model.Projects;
+import br.com.atos.main.repository.EmployeeRepository;
+import br.com.atos.main.repository.RepositoryCliente;
+import br.com.atos.main.utils.Retorno;
+
+@Service
+public class ClienteService {
+
+	@Autowired
+	RepositoryCliente rc;
+	
+	
+	
+	public List<Cliente> buscarTodosClientes()
+	{
+		
+		List<Cliente> arraycli = rc.findAll();
+		
+		return arraycli;
+	}
+	
+	public void removerCliente(Integer id)
+	{
+		rc.deleteById(id);
+
+	}
+	
+	public Cliente inserirClientes(Cliente cliente)
+	{
+		 Cliente clienteSalvo = rc.save(cliente);
+		 return clienteSalvo;
+	}
+	
+	public Cliente atualizarCliente(Cliente cliente, Integer id)
+	{
+		
+		Optional<Cliente> verificaCli = rc.findById(id);
+		
+		if(!verificaCli.isPresent())
+			return null;
+		
+		Cliente clienteEncontrado = verificaCli.get();
+		
+		clienteEncontrado.setNomeFantasia(cliente.getNomeFantasia());
+		clienteEncontrado.setRazaoSocial(cliente.getRazaoSocial());
+		clienteEncontrado.setDataAtualizacao(new Date());
+		
+		rc.save(clienteEncontrado);
+		
+		
+		return clienteEncontrado;
+	}
+
+	
+}

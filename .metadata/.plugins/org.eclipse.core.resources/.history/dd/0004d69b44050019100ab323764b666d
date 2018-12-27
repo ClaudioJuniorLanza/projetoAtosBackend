@@ -1,0 +1,5 @@
+package br.com.atos.main.model;
+
+public class Skill {
+
+}

@@ -1,0 +1,44 @@
+package br.com.atos.main.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+@Entity
+@Table(name = "employee_certification")
+@JsonView
+public class EmployeeCertification implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	@Id
+	@Column(name = "id_employee")
+	private Integer employee;
+	@Id
+	@Column(name = "id_certification")
+	private Integer certification;
+	
+	public EmployeeCertification(){}
+	
+	public EmployeeCertification(Integer employee, Integer certification){
+		this.employee = employee;
+		this.certification = certification;
+	}
+	
+	public Integer getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Integer employee) {
+		this.employee = employee;
+	}
+	public Integer getCertification() {
+		return certification;
+	}
+	public void setCertification(Integer certification) {
+		this.certification = certification;
+	}
+}

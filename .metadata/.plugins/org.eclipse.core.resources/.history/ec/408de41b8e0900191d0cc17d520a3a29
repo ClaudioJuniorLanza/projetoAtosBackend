@@ -1,0 +1,84 @@
+package br.com.atos.main.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.atos.main.model.Cliente;
+import br.com.atos.main.model.Employee;
+import br.com.atos.main.model.Projects;
+import br.com.atos.main.service.ProjectService;
+import br.com.atos.main.utils.Retorno;
+
+/*
+ * 
+ * Classe Responsável por receber as requisições
+ * destinadas a ações dos Projects
+ * 
+ */
+
+
+@RestController
+public class ProjectController {
+
+	@Autowired
+	ProjectService ps;
+	
+	@CrossOrigin
+	@RequestMapping(value = "/salvarProject", method=RequestMethod.POST)
+	public Retorno gravarProject(@RequestBody Projects project)
+	{
+		Projects projectSalvo = ps.inserirProject(project);
+		Retorno ret = new Retorno();
+		ret.setIdRetorno(projectSalvo.getId_project());
+		ret.setMensagem(ret.getMensageminsere());
+		return ret;
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/consultarProject", method=RequestMethod.GET)
+	public List<Projects> retornarProject()
+	{
+		List<Projects> proj = ps.buscarTodosEmployee();
+		return proj;
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/removerproject/{id}", method=RequestMethod.DELETE)
+	public Retorno deletarProject(@PathVariable Integer id)
+	{
+		ps.removerProject(id);
+		Retorno ret = new Retorno();
+		ret.setIdRetorno(id);
+		String msg = ret.getMensagemdeleta();
+		ret.setMensagem(msg);
+		
+		return ret;
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/atualizarproject/{id}", method=RequestMethod.PUT)
+	public Retorno alterarProject(@RequestBody Projects project, @PathVariable Integer id)
+	{
+		
+		Projects verificaProj = ps.atualizarProject(project, id);
+		
+		if(verificaProj.getId_project()!= null)
+		{
+			Retorno ret = new Retorno();
+			ret.setIdRetorno(verificaProj.getId_project());
+			String msg = ret.getMensagematualiza();
+			ret.setMensagem(msg);
+			
+			return ret;
+		}
+		return null;
+		
+	}
+}

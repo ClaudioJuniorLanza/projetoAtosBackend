@@ -1,0 +1,27 @@
+package br.com.atos.main.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.atos.main.model.Projects;
+import br.com.atos.main.repository.ProjectRepository;
+
+@Service
+public class ProjectService {
+	
+	@Autowired
+	ProjectRepository pr;
+
+	public Projects inserirProject(Projects project) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Projects> buscarTodosEmployee() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

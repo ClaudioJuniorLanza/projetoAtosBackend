@@ -1,0 +1,20 @@
+package br.com.atos.main;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * Classe start da Aplicação
+ * @author Claudio Junior
+ *
+ */
+
+@SpringBootApplication
+public class AtosApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(AtosApplication.class, args);
+
+	}
+
+}

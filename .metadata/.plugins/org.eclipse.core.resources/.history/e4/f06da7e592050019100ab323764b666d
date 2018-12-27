@@ -1,0 +1,15 @@
+package br.com.atos.main.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+@Entity
+@Table(name = "employee_certification")
+@JsonView
+public class EmployeeCertification implements Serializable {
+
+}

@@ -1,0 +1,83 @@
+package br.com.atos.main.controller;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.atos.main.model.Cliente;
+import br.com.atos.main.model.Employee;
+import br.com.atos.main.model.Projects;
+import br.com.atos.main.repository.RepositoryCliente;
+import br.com.atos.main.service.ClienteService;
+import br.com.atos.main.utils.Retorno;
+
+@RestController
+public class ControllerCliente {
+	
+	@Autowired
+	ClienteService cs;
+	
+	@CrossOrigin
+	@RequestMapping(value = "/clientes", method=RequestMethod.GET)
+	public List<Cliente> retornarClientes()
+	{
+		List<Cliente> clientes = cs.buscarTodosClientes();
+		return clientes;
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/clientes/{id}", method=RequestMethod.DELETE)
+	public Retorno deletarCliente(@PathVariable Integer id)
+	{
+		cs.removerCliente(id);
+		Retorno ret = new Retorno();
+		ret.setIdRetorno(id);
+		String msg = ret.getMensagemdeleta();
+		ret.setMensagem(msg);
+		
+		return ret;
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/clientes/{id}", method=RequestMethod.PUT)
+	public Retorno alterarCliente(@RequestBody Cliente cliente, @PathVariable Integer id)
+	{
+		
+		Cliente verificaCli = cs.atualizarCliente(cliente, id);
+		
+		if(verificaCli.getId()!= null)
+		{
+			Retorno ret = new Retorno();
+			ret.setIdRetorno(verificaCli.getId());
+			String msg = ret.getMensagematualiza();
+			ret.setMensagem(msg);
+			
+			return ret;
+		}
+		return null;
+		
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/clientes", method=RequestMethod.POST)
+	public Retorno gravarClientes(@RequestBody Cliente cliente)
+	{
+		Cliente clienteSalvo = cs.inserirClientes(cliente);
+		Retorno ret = new Retorno();
+		ret.setIdRetorno(clienteSalvo.getId());
+		ret.setMensagem(ret.getMensageminsere());
+		return ret;
+	}
+
+	
+
+
+}

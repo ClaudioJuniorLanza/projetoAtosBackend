@@ -1,0 +1,41 @@
+package br.com.atos.main.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import br.com.atos.main.model.Skill;
+import br.com.atos.main.service.SkillService;
+
+/**
+ * Classe Responsável por receber as requisições
+ * destinadas a ações de Skill
+ * @author Claudio Junior
+ *
+ */
+
+
+@RestController
+public class SkillController {
+
+	@Autowired
+	SkillService ss;
+	
+	/**
+	 * Método de buscar todos os dados de Skill
+	 * @return Lista de Skills cadastrados
+	 * @return
+	 */
+	
+	@CrossOrigin
+	@RequestMapping(value = "/consultarSkill", method=RequestMethod.GET)
+	public List<Skill> retornarSkill()
+	{
+		List<Skill> emp = ss.buscarTodasSkill();
+		return emp;
+	}
+	
+}

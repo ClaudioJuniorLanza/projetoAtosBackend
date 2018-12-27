@@ -1,0 +1,43 @@
+package br.com.atos.main.model;
+
+import java.io.Serializable;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import br.com.fti.pizzaria.model.SaborIngredientePK;
+
+
+
+@Entity
+@Table(name = "employee_skill")
+public class EmployeeSkill implements Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
+	
+	@EmbeddedId
+	private EmployeeSkillPK id;
+
+	@ManyToOne
+	@JoinColumn(name="_employee", insertable = false, updatable = false)
+	private Employee employee;
+	
+	@ManyToOne
+	@JoinColumn(name="_skill", insertable = false, updatable = false)
+	private Skill skill;
+	
+	public EmployeeSkill(){}
+	
+	public EmployeeSkill(Employee employee, Skill skill){
+		this.id = new EmployeeSkillPK(employee.getId(), 
+				skill.getId());
+		this.employee = employee;
+		this.skill = skill;
+	}
+	
+	
+}

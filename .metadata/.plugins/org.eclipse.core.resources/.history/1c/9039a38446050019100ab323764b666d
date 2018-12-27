@@ -1,0 +1,29 @@
+package br.com.atos.main.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+
+public class EmployeeSkillPK implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	
+	@Column(name = "_employee")
+	private Integer employee;
+	
+	@Column(name = "_skill")
+	private Integer skill;
+	
+	public EmployeeSkillPK(Integer employee, Integer skill) {
+		this.employee = employee;
+		this.skill = skill;
+	}
+	
+	public EmployeeSkillPK() {
+		
+	}
+	
+	
+
+}
